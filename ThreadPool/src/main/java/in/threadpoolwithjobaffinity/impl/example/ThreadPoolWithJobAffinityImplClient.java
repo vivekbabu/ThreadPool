@@ -5,7 +5,7 @@ import in.threadpoolwithjobaffinity.impl.ThreadPoolWithJobAffinityImpl;
 
 public class ThreadPoolWithJobAffinityImplClient {
 	public static void main(String[] args) throws InterruptedException {
-		ThreadPoolWithJobAffinity threadPoolWithJobAffinity = new ThreadPoolWithJobAffinityImpl(3);
+		ThreadPoolWithJobAffinity threadPoolWithJobAffinity = ThreadPoolWithJobAffinityImpl.newInstance(5);
 		for (long i = 1; i <= 20; i++) {
 			RunnableWithJobId runnableWithJobId = new RunnableWithJobId(i);
 			System.out.println("Submitted job " + i);

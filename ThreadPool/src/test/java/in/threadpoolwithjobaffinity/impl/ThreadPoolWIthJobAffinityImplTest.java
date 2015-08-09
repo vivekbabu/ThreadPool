@@ -38,7 +38,7 @@ public class ThreadPoolWIthJobAffinityImplTest {
 			Integer numberOfJobs, Integer processingThreadNamesSetSize, Boolean useSameJobIds) {
 		CountDownLatch countDownLatch = new CountDownLatch(numberOfJobs);
 		Set<String> runningThreadNames = Collections.synchronizedSet(new HashSet<String>());
-		ThreadPoolWithJobAffinity threadPoolWithJobAffinity = new ThreadPoolWithJobAffinityImpl(5);
+		ThreadPoolWithJobAffinity threadPoolWithJobAffinity = ThreadPoolWithJobAffinityImpl.newInstance(5);
 		for (int i = 0; i < numberOfJobs; i++) {
 			String jobId = "TestJob";
 			if (!useSameJobIds) {
@@ -78,7 +78,7 @@ public class ThreadPoolWIthJobAffinityImplTest {
 		CountDownLatch countDownLatch = new CountDownLatch(totalNumberOfJobsSubmitted);
 		Set<String> runningThreadNames = Collections.synchronizedSet(new HashSet<String>());
 		AtomicInteger totalJobsCompleted = new AtomicInteger(0);
-		ThreadPoolWithJobAffinity threadPoolWithJobAffinity = new ThreadPoolWithJobAffinityImpl(5);
+		ThreadPoolWithJobAffinity threadPoolWithJobAffinity = ThreadPoolWithJobAffinityImpl.newInstance(5);
 		for (int i = 1; i <= totalNumberOfJobsSubmitted; i++) {
 			String jobId = "TestJob" + i;
 

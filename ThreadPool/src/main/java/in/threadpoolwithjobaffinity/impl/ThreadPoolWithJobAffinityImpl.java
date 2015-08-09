@@ -23,16 +23,27 @@ public class ThreadPoolWithJobAffinityImpl implements ThreadPoolWithJobAffinity 
 	List<LinkedBlockingQueue<Job>> jobQueues;
 
 	private AtomicBoolean takeMoreJobs = new AtomicBoolean(true);
-
-	public ThreadPoolWithJobAffinityImpl(int threadPoolSize) {
+	
+	private ThreadPoolWithJobAffinityImpl(int threadPoolSize) {
 		this.threadPoolSize = threadPoolSize;
-
 		jobQueues = new ArrayList<LinkedBlockingQueue<Job>>(threadPoolSize);
 		for (int i = 0; i < threadPoolSize; i++) {
 			jobQueues.add(i, new LinkedBlockingQueue<Job>());
 		}
-		initializeThreadPool();
 	}
+	
+	/**
+	 * Creates an instance of {@link ThreadPoolWithJobAffinityImpl}
+	 * @param threadPoolSize the size of threadpool
+	 * @return an instance of {@link ThreadPoolWithJobAffinityImpl}
+	 */
+	public static ThreadPoolWithJobAffinityImpl newInstance(int threadPoolSize) {
+		ThreadPoolWithJobAffinityImpl threadPoolWithJobAffinityImpl = new ThreadPoolWithJobAffinityImpl(threadPoolSize);
+		threadPoolWithJobAffinityImpl.initializeThreadPool();
+		return threadPoolWithJobAffinityImpl;
+	}
+	
+	
 
 	@Override
 	public int poolSize() {
